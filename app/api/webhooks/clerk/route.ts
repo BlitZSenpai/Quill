@@ -53,5 +53,25 @@ export async function POST(req: Request) {
     });
   }
 
+  if (eventType === "user.updated") {
+    const currentUser = await db.user.findUnique({
+      where: {
+        externalUserId: payload.data.id,
+      },
+    });
+
+    if (!currentUser) return new Response("user not found");
+
+    await db.user.update({
+      where: {
+        externalUserId: payload.data.id,
+      },
+      data: {
+        username: payload.data.username,
+        imageUrl: payload.data.image_url,
+      },
+    });
+  }
+
   return new Response("", { status: 200 });
 }

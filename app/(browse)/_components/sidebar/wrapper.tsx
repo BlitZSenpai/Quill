@@ -2,21 +2,17 @@
 
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store/use-sidebar";
-import { useEffect, useState } from "react";
-import { ToggleSkeleton } from "./toggle";
+import { useIsClient } from "usehooks-ts";
 import { RecommendedSkeleton } from "./recommended";
+import { ToggleSkeleton } from "./toggle";
 
 interface WrapperProps {
   children: React.ReactNode;
 }
 
 export const Wrapper = ({ children }: WrapperProps) => {
-  const [isClient, setIsClient] = useState(false);
+  const isClient = useIsClient();
   const { collapsed } = useSidebar((state) => state);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   if (!isClient)
     return (

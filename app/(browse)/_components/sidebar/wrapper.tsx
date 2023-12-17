@@ -2,13 +2,22 @@
 
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store/use-sidebar";
+import { useEffect, useState } from "react";
 
 interface WrapperProps {
   children: React.ReactNode;
 }
 
 export const Wrapper = ({ children }: WrapperProps) => {
+  const [isClient, setIsClient] = useState(false);
   const { collapsed } = useSidebar((state) => state);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
   return (
     <aside
       className={cn(

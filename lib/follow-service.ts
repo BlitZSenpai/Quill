@@ -69,3 +69,41 @@ export const followUser = async (id: string) => {
 
   return follow;
 };
+
+export const unFollowUser = async (id: string) => {
+  const currentUser = await getUser();
+
+  const otherUser = await db.user.findUnique({
+    where: { id },
+  });
+
+  if (!otherUser) {
+    throw new Error("User not found");
+  }
+
+  if (otherUser.username === currentUser.username) {
+    throw new Error("Cannot unfollow yourself");
+  }
+
+  const existingFollow = await db.follow.findFirst({
+    where: {
+      followerId: currentUser.id,
+      followingId: otherUser.id,
+    },
+  });
+
+  if (!existingFollow) {
+    throw new Error("Not following user");
+  }
+
+  const unFollow = await db.follow.delete({
+    where: {
+      id: existingFollow.id,
+    },
+    include: {
+      following: true,
+    },
+  });
+
+  return unFollow;
+};

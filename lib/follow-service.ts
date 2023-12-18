@@ -52,7 +52,7 @@ export const followUser = async (id: string) => {
     },
   });
 
-  if (!existingFollow) {
+  if (existingFollow) {
     throw new Error("Already following");
   }
 

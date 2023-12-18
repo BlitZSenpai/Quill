@@ -112,7 +112,7 @@ export const getFollowedUsers = async () => {
   try {
     const currentUser = await getUser();
 
-    const followedUsers = db.follow.findMany({
+    const followedUsers = await db.follow.findMany({
       where: {
         followerId: currentUser.id,
       },

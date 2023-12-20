@@ -17,10 +17,12 @@ export const isFollowingUser = async (id: string) => {
       return true;
     }
 
-    const existingFollow = await db.follow.findFirst({
+    const existingFollow = await db.follow.findUnique({
       where: {
-        followerId: currentUser.id,
-        followingId: otherUser.id,
+        followerId_followingId: {
+          followerId: currentUser.id,
+          followingId: otherUser.id,
+        },
       },
     });
 

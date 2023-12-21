@@ -54,6 +54,7 @@ export const Actions = ({ isFollowing, userId, isBlocked }: ActionsProps) => {
         .catch(() => toast.error("Something went wrong!"));
     });
   };
+
   const onBlockClick = () => {
     if (isBlocked) {
       handleUnBlock();

@@ -1,5 +1,5 @@
+import { db } from "@/lib/db";
 import { getUser } from "./auth-service";
-import { db } from "./db";
 
 export const isBlockedByUser = async (id: string) => {
   try {
@@ -13,7 +13,7 @@ export const isBlockedByUser = async (id: string) => {
       throw new Error("User not found");
     }
 
-    if (otherUser.username === currentUser.username) {
+    if (otherUser.id === currentUser.id) {
       return false;
     }
 
@@ -36,7 +36,7 @@ export const blockUser = async (id: string) => {
   const currentUser = await getUser();
 
   if (currentUser.id === id) {
-    throw new Error("Cant block yourself");
+    throw new Error("Cannot block yourself");
   }
 
   const otherUser = await db.user.findUnique({
@@ -44,7 +44,7 @@ export const blockUser = async (id: string) => {
   });
 
   if (!otherUser) {
-    throw new Error("User not found!");
+    throw new Error("User not found");
   }
 
   const existingBlock = await db.block.findUnique({
@@ -98,10 +98,10 @@ export const unBlockUser = async (id: string) => {
   });
 
   if (!existingBlock) {
-    throw new Error("User is not Blocked");
+    throw new Error("Not blocked");
   }
 
-  const unBlock = await db.block.delete({
+  const unblock = await db.block.delete({
     where: {
       id: existingBlock.id,
     },
@@ -110,5 +110,5 @@ export const unBlockUser = async (id: string) => {
     },
   });
 
-  return unBlock;
+  return unblock;
 };

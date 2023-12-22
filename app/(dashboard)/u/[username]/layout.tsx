@@ -1,4 +1,5 @@
 import { Navbar } from "./_components/navbar";
+import { Sidebar } from "./_components/sidebar";
 
 interface CreatorLayoutProps {
   params: { username: string };
@@ -9,7 +10,10 @@ const CreatorLayout = ({ params, children }: CreatorLayoutProps) => {
   return (
     <>
       <Navbar />
-      <div className="pt-20">{children}</div>
+      <div className="pt-20">
+        <Sidebar />
+        {children}
+      </div>
     </>
   );
 };

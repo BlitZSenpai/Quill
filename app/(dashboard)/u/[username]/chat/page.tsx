@@ -1,6 +1,7 @@
 import { getUser } from "@/lib/auth-service";
 import { getStreamByUserId } from "@/lib/stream-service";
 import { ToggleCard } from "./_components/toggle-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ChatPage = async () => {
   const currentUser = await getUser();
@@ -25,3 +26,7 @@ const ChatPage = async () => {
 };
 
 export default ChatPage;
+
+export const ToggleCardSkeleton = () => {
+  return <Skeleton className="rounded-xl p-10 w-full" />;
+};

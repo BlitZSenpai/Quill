@@ -15,6 +15,7 @@ interface ToggleCardProps {
 
 export const ToggleCard = ({ label, value = false, field }: ToggleCardProps) => {
   const [isPending, startTransition] = useTransition();
+
   const onChange = () => {
     startTransition(() => {
       updateStream({ [field]: !value })
@@ -22,6 +23,7 @@ export const ToggleCard = ({ label, value = false, field }: ToggleCardProps) => 
         .catch(() => toast.error("Something went wrong!"));
     });
   };
+
   return (
     <div className="rounded-xl bg-muted p-6">
       <div className="flex items-center justify-between">

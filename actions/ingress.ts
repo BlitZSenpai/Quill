@@ -72,7 +72,7 @@ export const createIngress = async (ingressType: IngressInput) => {
   }
 
   await db.stream.update({
-    where: { id: user.id },
+    where: { userId: user.id },
     data: {
       ingressId: ingress.ingressId,
       serverUrl: ingress.url,

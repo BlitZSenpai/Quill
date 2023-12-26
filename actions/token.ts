@@ -1,10 +1,10 @@
 "use server";
 
+import { AccessToken } from "livekit-server-sdk";
+import { v4 } from "uuid";
 import { getUser } from "@/lib/auth-service";
 import { isBlockedByUser } from "@/lib/block-service";
 import { getUserById } from "@/lib/user-service";
-import { AccessToken } from "livekit-server-sdk";
-import { v4 } from "uuid";
 
 export const createViewerToken = async (hostId: string) => {
   let user;
@@ -14,7 +14,6 @@ export const createViewerToken = async (hostId: string) => {
   } catch {
     const id = v4();
     const username = `guest#${Math.floor(Math.random() * 1000)}`;
-
     user = { id, username };
   }
 
@@ -32,7 +31,7 @@ export const createViewerToken = async (hostId: string) => {
 
   const isHost = user.id === host.id;
 
-  const token = new AccessToken(process.env.LIVEKIT_API_KEY, process.env.LIVEKIT_API_SECRET, {
+  const token = new AccessToken(process.env.LIVEKIT_API_KEY!, process.env.LIVEKIT_API_SECRET!, {
     identity: isHost ? `host-${user.id}` : user.id,
     name: user.username,
   });

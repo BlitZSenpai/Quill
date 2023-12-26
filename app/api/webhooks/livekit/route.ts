@@ -1,6 +1,7 @@
-import { db } from "@/lib/db";
-import { WebhookReceiver } from "livekit-server-sdk";
 import { headers } from "next/headers";
+import { WebhookReceiver } from "livekit-server-sdk";
+import { db } from "@/lib/db";
+import { NextResponse } from "next/server";
 
 const receiver = new WebhookReceiver(process.env.LIVEKIT_API_KEY!, process.env.LIVEKIT_API_SECRET!);
 
@@ -10,7 +11,7 @@ export async function POST(req: Request) {
   const authorization = headerPayload.get("Authorization");
 
   if (!authorization) {
-    throw new Response("No authorization header", { status: 400 });
+    return new Response("No authorization header", { status: 400 });
   }
 
   const event = receiver.receive(body, authorization);
@@ -36,4 +37,6 @@ export async function POST(req: Request) {
       },
     });
   }
+
+  return NextResponse.json(body, { status: 200 });
 }

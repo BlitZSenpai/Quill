@@ -1,6 +1,6 @@
 import { StreamPlayer } from "@/components/stream-player";
 import { getUserByUsername } from "@/lib/user-service";
-import { currentUser } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 interface DashboardPageProps {
   params: {
@@ -9,10 +9,12 @@ interface DashboardPageProps {
 }
 
 const DashboardPage = async ({ params }: DashboardPageProps) => {
-  const externalUser = await currentUser();
+  const externalUser = auth();
   const user = await getUserByUsername(params.username);
 
-  if (!user || user.externalUserId !== externalUser?.id || !user.stream) {
+  console.log(user?.externalUserId);
+
+  if (!user || user.externalUserId !== externalUser?.userId || !user.stream) {
     throw new Error("Unauthorized");
   }
   return (

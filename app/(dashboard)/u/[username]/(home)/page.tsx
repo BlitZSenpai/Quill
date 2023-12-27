@@ -12,8 +12,6 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
   const externalUser = auth();
   const user = await getUserByUsername(params.username);
 
-  console.log(user?.externalUserId);
-
   if (!user || user.externalUserId !== externalUser?.userId || !user.stream) {
     throw new Error("Unauthorized");
   }

@@ -15,9 +15,6 @@ export const Video = ({ hostName, hostId }: VideoProps) => {
     (track) => track.participant.identity === hostId
   );
 
-  console.log({ participant });
-  console.log({ connectionState });
-
   let content;
 
   if (!participant && connectionState === ConnectionState.Connected) {

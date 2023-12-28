@@ -2,7 +2,9 @@
 
 import { useTracks } from "@livekit/components-react";
 import { Participant, Track } from "livekit-client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { FullscreenControl } from "./fullscreen-control";
+import { useEventListener } from "usehooks-ts";
 
 interface LiveVideoProps {
   participant: Participant;
@@ -11,6 +13,23 @@ interface LiveVideoProps {
 export const LiveVideo = ({ participant }: LiveVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggeFullscreen = () => {
+    if (isFullscreen) {
+      document.exitFullscreen();
+    } else {
+      wrapperRef.current?.requestFullscreen();
+    }
+  };
+
+  const handleFullscreen = () => {
+    const isCurrentlyFullscreen = document.fullscreenElement !== null;
+    setIsFullscreen(isCurrentlyFullscreen);
+  };
+
+  useEventListener("fullscreenchange", handleFullscreen, wrapperRef);
 
   useTracks([Track.Source.Camera, Track.Source.Microphone])
     .filter((track) => track.participant.identity === participant.identity)
@@ -22,6 +41,11 @@ export const LiveVideo = ({ participant }: LiveVideoProps) => {
   return (
     <div ref={wrapperRef} className="relative h-full flex">
       <video ref={videoRef} width="100%" />
+      <div className="absolute top-0 h-full w-full opacity-0 hover:opacity-100 hover:transition-all">
+        <div className="absolute bottom-0 flex h-14 w-full items-center justify-between bg-gradient-to-r from-neutral-900 px-4">
+          <FullscreenControl isFullscreen={isFullscreen} onToggle={toggeFullscreen} />
+        </div>
+      </div>
     </div>
   );
 };

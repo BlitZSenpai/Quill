@@ -5,6 +5,7 @@ import { useChat, useConnectionState, useRemoteParticipant } from "@livekit/comp
 import { ConnectionState } from "livekit-client";
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { ChatHeader } from "./chat-header";
 
 interface ChatProps {
   viewerName: string;
@@ -59,9 +60,8 @@ export const Chat = ({
   };
 
   return (
-    <div>
-      Chat
-      <div></div>
+    <div className="flex flex-col border-l border-b pt-0 bg-background h-[calc(100vh-80px)]">
+      <ChatHeader />
     </div>
   );
 };

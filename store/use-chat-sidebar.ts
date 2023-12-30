@@ -5,7 +5,7 @@ export enum ChatVariant {
   COMMUNITY = "COMMUNITY",
 }
 
-interface CreatorSidebarProps {
+interface ChatSidebarProps {
   collapsed: boolean;
   variant: ChatVariant;
   onExpand: () => void;
@@ -13,7 +13,7 @@ interface CreatorSidebarProps {
   onChangeVariant: (variant: ChatVariant) => void;
 }
 
-export const useCreatorSidebar = create<CreatorSidebarProps>((set) => ({
+export const useChatSidebar = create<ChatSidebarProps>((set) => ({
   collapsed: false,
   variant: ChatVariant.CHAT,
   onExpand: () => set(() => ({ collapsed: false })),

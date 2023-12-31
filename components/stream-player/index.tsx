@@ -7,6 +7,7 @@ import { LiveKitRoom } from "@livekit/components-react";
 import { Stream, User } from "@prisma/client";
 import { Chat } from "./chat";
 import { Video } from "./video";
+import { ChatToggle } from "./chat-toggle";
 
 interface StreamPlayerProps {
   user: User & { stream: Stream | null };
@@ -24,6 +25,11 @@ export const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) =
 
   return (
     <>
+      {collapsed && (
+        <div className="hidden lg:block fixed top-[85px] right-3 z-50">
+          <ChatToggle />
+        </div>
+      )}
       <LiveKitRoom
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL!}

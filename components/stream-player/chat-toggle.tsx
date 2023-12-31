@@ -18,6 +18,7 @@ export const ChatToggle = () => {
       onCollapse();
     }
   };
+
   return (
     <Hint label={label} side="left" asChild>
       <Button

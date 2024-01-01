@@ -5,6 +5,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { ChatInfo } from "./chat-info";
 
 interface ChatFormProps {
   onSubmit: () => void;
@@ -52,6 +53,7 @@ export const ChatForm = ({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-y-4 p-3 items-center">
       <div className="w-full">
+        <ChatInfo isDelayed={isDelayed} isFollowersOnly={isFollowersOnly} />
         <Input
           onChange={(e) => onChange(e.target.value)}
           value={value}

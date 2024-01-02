@@ -23,7 +23,7 @@ export const ChatToggle = () => {
     <Hint label={label} side="left" asChild>
       <Button
         onClick={onToggle}
-        variant="ghost"
+        variant={collapsed ? "outline" : "ghost"}
         className="h-auto p-2 hover:bg-white/10 hover:text-primary bg-transparent">
         <Icon className="h-4 w-4" />
       </Button>

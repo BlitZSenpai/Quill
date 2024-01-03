@@ -15,6 +15,7 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
   if (!user || user.externalUserId !== externalUser?.userId || !user.stream) {
     throw new Error("Unauthorized");
   }
+
   return (
     <div className="h-full">
       <StreamPlayer user={user} stream={user.stream} isFollowing />

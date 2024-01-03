@@ -53,8 +53,8 @@ export const Actions = ({ hostId, isFollowing, isHost }: ActionsProps) => {
 
   return (
     <Button
-      onClick={toggleFollow || isHost}
-      disabled={isPending}
+      onClick={toggleFollow}
+      disabled={isPending || isHost}
       variant="primary"
       size="sm"
       className="w-full lg:w-auto">

@@ -1,7 +1,12 @@
 "use client";
 
+import { useState, useTransition } from "react";
 import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { updateStream } from "@/actions/stream";
+import { toast } from "sonner";
 
 interface InfoModalProps {
   initialName: string;
@@ -9,6 +14,23 @@ interface InfoModalProps {
 }
 
 export const InfoModal = ({ initialName, initialThumbnail }: InfoModalProps) => {
+  const [isPending, startTransition] = useTransition();
+  const [name, setName] = useState(initialName);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    startTransition(() => {
+      updateStream({ name: name })
+        .then(() => toast.success("Stream info updated"))
+        .catch(() => toast.error("Something went wrong!"));
+    });
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,6 +42,22 @@ export const InfoModal = ({ initialName, initialThumbnail }: InfoModalProps) => 
         <DialogHeader>
           <DialogTitle>Edit Stream Info</DialogTitle>
         </DialogHeader>
+        <form onSubmit={onSubmit} className="space-y-14">
+          <div className="space-y-2">
+            <Label>Title</Label>
+            <Input onChange={onChange} placeholder="Stream Title" value={name} disabled={isPending} />
+          </div>
+          <div className="flex justify-between">
+            <DialogClose asChild>
+              <Button type="button" variant="ghost">
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button disabled={isPending} variant="primary" type="submit">
+              Save
+            </Button>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

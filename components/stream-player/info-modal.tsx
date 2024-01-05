@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { ElementRef, useRef, useState, useTransition } from "react";
 import { Button } from "../ui/button";
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Input } from "../ui/input";
@@ -14,6 +14,7 @@ interface InfoModalProps {
 }
 
 export const InfoModal = ({ initialName, initialThumbnail }: InfoModalProps) => {
+  const closeRef = useRef<ElementRef<"button">>(null);
   const [isPending, startTransition] = useTransition();
   const [name, setName] = useState(initialName);
 
@@ -26,7 +27,10 @@ export const InfoModal = ({ initialName, initialThumbnail }: InfoModalProps) => 
 
     startTransition(() => {
       updateStream({ name: name })
-        .then(() => toast.success("Stream info updated"))
+        .then(() => {
+          toast.success("Stream info updated");
+          closeRef.current?.click();
+        })
         .catch(() => toast.error("Something went wrong!"));
     });
   };
@@ -48,7 +52,7 @@ export const InfoModal = ({ initialName, initialThumbnail }: InfoModalProps) => 
             <Input onChange={onChange} placeholder="Stream Title" value={name} disabled={isPending} />
           </div>
           <div className="flex justify-between">
-            <DialogClose asChild>
+            <DialogClose ref={closeRef} asChild>
               <Button type="button" variant="ghost">
                 Cancel
               </Button>

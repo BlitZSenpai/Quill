@@ -37,10 +37,10 @@ export const InfoCard = ({ name, thumbnailUrl, hostId, viewerId }: InfoCardProps
             <p className="font-semibold text-sm">{name}</p>
           </div>
           <div>
-            <h3 className="text-muted-foreground mb-2 text-sm">Thumbnail</h3>
+            <h3 className="text-muted-foreground mb-3 text-sm">Thumbnail</h3>
             {thumbnailUrl && (
               <div className="relative aspect-video rounded-md overflow-hidden w-[200px] border border-white/10">
-                <Image fill src={thumbnailUrl} alt={name} />
+                <Image fill src={thumbnailUrl} alt={name} className="object-cover" />
               </div>
             )}
           </div>

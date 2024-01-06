@@ -17,6 +17,7 @@ export const InfoCard = ({ name, thumbnailUrl, hostId, viewerId }: InfoCardProps
   const isHost = viewerId === hostAsViewer;
 
   if (!isHost) return null;
+
   return (
     <div className="px-4">
       <div className="rounded-xl bg-background">

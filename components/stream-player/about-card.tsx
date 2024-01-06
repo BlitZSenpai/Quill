@@ -19,9 +19,9 @@ export const AboutCard = ({ hostName, hostId, viewerId, bio, followersCount }: A
 
   return (
     <div className="px-4">
-      <div className="group rounded-xl p-6 lg:p-10 flex flex-col bg-background gap-y-3">
+      <div className="group rounded-xl p-6 flex flex-col bg-background gap-y-[10px]">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-2 font-semibold text-lg lg:text-2xl capitalize">
+          <div className="flex items-center gap-x-2 font-semibold text-lg lg:text-xl capitalize">
             About {hostName}
             <VerifiedMark />
           </div>

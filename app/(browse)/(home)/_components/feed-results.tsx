@@ -1,5 +1,6 @@
 import { getStreams } from "@/lib/feed-service";
-import { FeedCard } from "./feed-card";
+import { FeedCard, FeedCardSkeleton } from "./feed-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const FeedResults = async () => {
   const data = await getStreams();
@@ -17,5 +18,14 @@ export const FeedResults = async () => {
 };
 
 export const FeedResultsSkeleton = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Skeleton className="h-8 w-[290px] mb-4" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        {[...Array(4)].map((_, i) => (
+          <FeedCardSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  );
 };

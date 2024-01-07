@@ -6,7 +6,12 @@ import { Stream, User } from "@prisma/client";
 import Link from "next/link";
 
 interface FeedCardProps {
-  data: Stream & { user: User };
+  data: {
+    user: User;
+    isLive: boolean;
+    name: string;
+    thumbnailUrl: string | null;
+  };
 }
 
 export const FeedCard = ({ data }: FeedCardProps) => {

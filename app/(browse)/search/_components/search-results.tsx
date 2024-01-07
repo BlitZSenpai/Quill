@@ -1,5 +1,6 @@
 import { getSearchResults } from "@/lib/search-service";
-import { SearchResultCard } from "./search-result-card";
+import { SearchResultCard, SearchResultCardSkeleton } from "./search-result-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface SearchResultsProps {
   term?: string;
@@ -23,5 +24,14 @@ export const SearchResults = async ({ term }: SearchResultsProps) => {
 };
 
 export const SearchResultsSkeleton = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Skeleton className="h-8 w-[290px] mb-4" />
+      <div className="flex flex-col gap-y-4">
+        {[...Array(4)].map((_, i) => (
+          <SearchResultCardSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  );
 };

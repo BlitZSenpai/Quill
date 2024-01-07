@@ -14,7 +14,7 @@ const SearchPage = ({ searchParams }: SearchPageProps) => {
   }
 
   return (
-    <div className="h-full max-w-2xl p-8 mx-auto">
+    <div className="h-full max-w-screen-2xl p-8 mx-auto">
       <Suspense fallback={<SearchResultsSkeleton />}>
         <SearchResults term={searchParams.term} />
       </Suspense>

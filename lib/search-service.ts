@@ -1,7 +1,7 @@
 import { getUser } from "./auth-service";
 import { db } from "./db";
 
-export const getSearchResults = async (term: string) => {
+export const getSearchResults = async (term?: string) => {
   let userId;
 
   try {

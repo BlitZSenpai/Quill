@@ -15,7 +15,10 @@ export const UnblockButton = ({ userId }: UnblockButtonProps) => {
   const onClick = () => {
     startTransition(() => {
       onUnBlock(userId)
-        .then((data) => toast.success(`${data.blocked.username} has been unblocked`))
+        .then((data) => {
+          const name = data.blocked.username;
+          toast.success(`${name.charAt(0).toUpperCase() + name.slice(1)} has been unbanned`);
+        })
         .catch(() => toast.error("Something went wrong!"));
     });
   };
@@ -27,7 +30,7 @@ export const UnblockButton = ({ userId }: UnblockButtonProps) => {
       variant="link"
       size="sm"
       className="flex items-center text-blue-500 w-full pr-10">
-      Unblock
+      Unban
     </Button>
   );
 };

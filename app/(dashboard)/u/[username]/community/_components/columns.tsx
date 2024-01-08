@@ -34,7 +34,7 @@ export const columns: ColumnDef<BlockedUser>[] = [
     accessorKey: "createdAt",
     header: ({ column }) => (
       <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-        Date blocked
+        Date banned
         <ArrowUpDown className="ml-1.5 h-4 w-4" />
       </Button>
     ),

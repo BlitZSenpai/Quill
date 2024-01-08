@@ -31,7 +31,10 @@ export const CommunityItem = ({
 
     startTransition(() => {
       onBlock(participantIdentity)
-        .then(() => toast.success(`Blocked ${participantName}`))
+        .then(() => {
+          const name = participantName;
+          toast.success(`Banned ${name.charAt(0).toUpperCase() + name.slice(1)}`);
+        })
         .catch(() => toast.error("Something went wrong!"));
     });
   };

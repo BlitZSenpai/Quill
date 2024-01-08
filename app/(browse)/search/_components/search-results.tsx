@@ -1,6 +1,6 @@
 import { getSearchResults } from "@/lib/search-service";
-import { SearchResultCard, SearchResultCardSkeleton } from "./search-result-card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { SearchResultCard, SearchResultCardSkeleton } from "./search-card";
 
 interface SearchResultsProps {
   term?: string;
@@ -8,6 +8,7 @@ interface SearchResultsProps {
 
 export const SearchResults = async ({ term }: SearchResultsProps) => {
   const data = await getSearchResults(term);
+
   return (
     <div>
       <h2 className="text-lg font-semibold mb-4">Results for the term &quot;{term}&quot;</h2>

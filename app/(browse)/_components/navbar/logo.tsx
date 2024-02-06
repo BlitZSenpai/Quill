@@ -16,7 +16,7 @@ export const Logo = () => {
           <Image src="/logo.svg" alt="logo" height="32" width="32" />
         </div>
         <div className={cn("hidden lg:block", font.className)}>
-          <p className="text-lg font-semibold">Trinity</p>
+          <p className="text-lg font-semibold">Quill</p>
         </div>
       </div>
     </Link>

@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Trinity",
+  title: "Quill",
   description: "A Twitch clone",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
         <body className={inter.className}>
-          <ThemeProvider attribute="class" forcedTheme="dark" storageKey="trinity-theme">
+          <ThemeProvider attribute="class" forcedTheme="dark" storageKey="Quill-theme">
             <Toaster theme="light" position="bottom-center" />
             {children}
           </ThemeProvider>

@@ -30,9 +30,9 @@ To get started with Quill locally, follow these steps:
 
 <!---->
 
-    git clone https://github.com/your-username/quill.gitcd quill
+    git clone https://github.com/koushikyemula/quill.gitcd quill
 
-2.  Install dependencies:
+1.  Install dependencies:
 
 <!---->
 

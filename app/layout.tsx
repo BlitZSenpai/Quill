@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
+import TopLoader from "@/components/top-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <body className={inter.className}>
           <ThemeProvider attribute="class" forcedTheme="dark" storageKey="Quill-theme">
+            <TopLoader />
             <Toaster theme="light" position="bottom-center" />
             {children}
           </ThemeProvider>
